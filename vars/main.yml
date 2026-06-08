@@ -1,2 +1,13 @@
 ---
 # vars file for aws_net
+
+name: "ansible-ec2-instance"
+image_id: "ami-00e801948462f718a"
+instance_type: "t3.micro"
+key_name: "Docker-key"
+region: "us-east-1"
+env_name: "Testing"
+
+vpc_name: "ansible-vpc"
+vpc_cidr: "10.0.0.0/16"
+

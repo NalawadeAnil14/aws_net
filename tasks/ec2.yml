@@ -1,0 +1,13 @@
+---
+# tasks file for aws_net
+
+- name: Create an aws EC2 instance 
+  amazon.aws.ec2_instance:
+    name: "{{ name }}"
+    image_id: "{{ image_id }}"
+    instance_type: "{{ instance_type }}"
+    key_name: "{{ key_name }}"
+    region: "{{ region }}"
+  # vpc_subnet_id: subnet-5ca1ab1e
+    tags: 
+      Environment: "{{ env_name}}"
