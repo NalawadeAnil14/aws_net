@@ -3,6 +3,7 @@
     state: present
     vpc_id: "{{ vpc_out.vpc.id }}"
     region: "{{ region }}"
+    az: "{{ availibility_zones[item] }}"
     cidr: "{{ vpc_cidr | ansible.utils.ipsubnet(24, item) }}"
     map_public: yes
     tags:
@@ -10,16 +11,12 @@
   loop: "{{  range(0, availibility_zones | length )}}" 
   register: public_subnet_out
 
-- name: Out 
-  debug: 
-    var: public_subnet_out
-
-
 - name: Private subnet creation 
   ec2_vpc_subnet:
     state: present
     vpc_id: "{{ vpc_out.vpc.id }}"
     region: "{{ region }}"
+    az: "{{ availibility_zones[item] }}"
     cidr: "{{ vpc_cidr | ansible.utils.ipsubnet(24, item+10) }}"
     
     tags:

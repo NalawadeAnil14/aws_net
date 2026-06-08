@@ -1,0 +1,10 @@
+#!/bin/bash
+
+yum install -y httpd
+
+cat <<'EOF' > /var/www/html/index.html
+{{ lookup('template', 'index.html.j2') }}
+EOF
+
+systemctl enable httpd
+systemctl start httpd

@@ -8,6 +8,8 @@
     instance_type: "{{ instance_type }}"
     key_name: "{{ key_name }}"
     region: "{{ region }}"
-  # vpc_subnet_id: subnet-5ca1ab1e
+    user_data: "{{ lookup('template', '../templates/userdata.sh.j2') }}"
+    security_group: "{{ security_group.group_id }}"
+    vpc_subnet_id: "{{ public_subnet_out.results[0].subnet.id }}"
     tags: 
       Environment: "{{ env_name}}"

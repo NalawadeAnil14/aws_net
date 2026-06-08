@@ -1,0 +1,16 @@
+- name: Create Security Group
+  ec2_group:
+    name: "ansible-sg"
+    description: "sg created by ansible"
+    vpc_id: "{{ vpc_out.vpc.id }}"
+    region: "{{ region }}"
+    rules:
+      - proto: tcp
+        ports:
+        - 80
+        cidr_ip: 0.0.0.0/0
+      - proto: tcp
+        ports:
+        - 22
+        cidr_ip: 0.0.0.0/0
+  register: security_group

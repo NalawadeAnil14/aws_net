@@ -7,6 +7,3 @@
      Name: "ansible-igw"
   register: igw_out
 
-- name: display
-  debug: 
-    var: igw_out 

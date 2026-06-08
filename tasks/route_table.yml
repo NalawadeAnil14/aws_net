@@ -1,12 +1,16 @@
+- name: set fact for subnet ids 
+  set_fact:
+    public_subnet_ids: "{{ public_subnet_out.results | map(attribute='subnet.id') | list }}"
+
 - name: Route IGW
   ec2_vpc_route_table:
     vpc_id: "{{ vpc_out.vpc.id }}"
     region: "{{ region }}"
-    subnets:
-      - "{{ item.subnet.id }}"
+    subnets: "{{ public_subnet_ids }}"
+      #- "{{ item.subnet.id }}"
+      #- "{{ public_subnet_out.results | map(attribute='subnet.id') | list }}"
     routes:
       - dest: 0.0.0.0/0
         gateway_id: "{{ igw_out.gateway_id }}"
     tags:
       Name: "ansible-route"
-  loop: "{{ public_subnet_out.results }}" 
