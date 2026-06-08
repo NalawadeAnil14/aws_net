@@ -1,0 +1,12 @@
+- name: Route IGW
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc_out.vpc.id }}"
+    region: "{{ region }}"
+    subnets:
+      - "{{ item.subnet.id }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw_out.gateway_id }}"
+    tags:
+      Name: "ansible-route"
+  loop: "{{ public_subnet_out.results }}" 

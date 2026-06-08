@@ -1,0 +1,29 @@
+- name: Public subnet creation 
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc_out.vpc.id }}"
+    region: "{{ region }}"
+    cidr: "{{ vpc_cidr | ansible.utils.ipsubnet(24, item) }}"
+    map_public: yes
+    tags:
+      Name: "ansible-public-{{ availibility_zones[item] }}-subnet"
+  loop: "{{  range(0, availibility_zones | length )}}" 
+  register: public_subnet_out
+
+- name: Out 
+  debug: 
+    var: public_subnet_out
+
+
+- name: Private subnet creation 
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc_out.vpc.id }}"
+    region: "{{ region }}"
+    cidr: "{{ vpc_cidr | ansible.utils.ipsubnet(24, item+10) }}"
+    
+    tags:
+      Name: "ansible-private-{{ availibility_zones[item] }}-subnet"
+  loop: "{{  range(0, availibility_zones | length )}}"
+  register: private_subnet_out
+

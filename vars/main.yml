@@ -11,3 +11,6 @@ env_name: "Testing"
 vpc_name: "ansible-vpc"
 vpc_cidr: "10.0.0.0/16"
 
+availibility_zones: 
+  - "us-east-1a"
+  - "us-east-1b"

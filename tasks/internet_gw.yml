@@ -1,0 +1,12 @@
+- name: create IGW
+  ec2_vpc_igw:
+   vpc_id: "{{ vpc_out.vpc.id }}"
+   region: "{{ region }}"
+   state: "present"
+   tags:
+     Name: "ansible-igw"
+  register: igw_out
+
+- name: display
+  debug: 
+    var: igw_out 

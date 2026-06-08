@@ -5,3 +5,7 @@
     region: "{{ region }}"
     state: present
   register: vpc_out
+
+- name: display vpc output 
+  debug: 
+    var: vpc_out.vpc.id 

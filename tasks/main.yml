@@ -2,4 +2,7 @@
 # tasks file for aws_net
 
 - include_tasks: vpc.yml
-- include_tasks: ec2.yml
+- include_tasks: internet_gw.yml
+- include_tasks: subnet.yml
+- include_tasks: route_table.yml
+#- include_tasks: ec2.yml
